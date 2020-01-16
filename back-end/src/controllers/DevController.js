@@ -30,8 +30,25 @@ module.exports = {
                 techs: techsArray,
                 location
             });
+            res.json(dev);   
         }   
-        res.json(dev);
-        console.log(dev);     
+    },
+
+    async index(req, res) {
+        Dev.find((err, data) => {
+            if(!err) {
+                res.json(data);
+            }
+        });
+    },
+
+    async destroy(req, res) {
+        const { github_username } = req.params;
+
+        Dev.findOneAndDelete({github_username}, (err) => {
+            if(err) {
+                res.json({error: err});
+            }
+        });
     }
 }
