@@ -50,5 +50,17 @@ module.exports = {
                 res.json({error: err});
             }
         });
+    },
+
+    async show(req, res) {
+        const { github_username } = req.params;
+
+        Dev.findOne({github_username}, (err, data) => {
+            if(!err) {
+                res.json(data);
+            } else {
+                res.json({error: err});
+            }
+        });
     }
 }
